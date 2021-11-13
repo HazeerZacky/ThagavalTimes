@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThagavalTimes">
         <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".CoronaLiveTicker"
             android:exported="false" />
         <activity

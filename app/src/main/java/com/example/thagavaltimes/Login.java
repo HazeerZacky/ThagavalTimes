@@ -6,7 +6,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-public class Instagram extends AppCompatActivity {
+public class Login extends AppCompatActivity {
+
 
     ///Initialize Variable
     DrawerLayout drawerLayout;
@@ -14,12 +15,11 @@ public class Instagram extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instagram);
+        setContentView(R.layout.activity_login);
 
         //Assign Variable
         drawerLayout = findViewById(R.id.drawerLayout);
     }
-
 
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);
@@ -45,12 +45,12 @@ public class Instagram extends AppCompatActivity {
         MainActivity.redirectActivity(this,Category.class);
     }
 
-    public void ClickSettings(View view){
-        MainActivity.redirectActivity(this,Settings.class);
+    public void ClickInstagram(View view){
+        MainActivity.redirectActivity(this,Instagram.class);
     }
 
-    public void ClickInstagram(View view){
-        recreate();
+    public void ClickSettings(View view){
+        MainActivity.redirectActivity(this,Settings.class);
     }
 
     public void ClickSupport(View view){
@@ -60,8 +60,7 @@ public class Instagram extends AppCompatActivity {
     public void ClickAboutUs(View view){
         MainActivity.redirectActivity(this,AboutUs.class);
     }
-
     public void ClickLogin(View view){
-        MainActivity.redirectActivity(this,Login.class);
+        recreate();
     }
 }

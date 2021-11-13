@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
         redirectActivity(this,AboutUs.class);
     }
 
+    public void ClickLogin(View view) {
+        redirectActivity(this,Login.class);
+    }
+
     public static void redirectActivity(Activity activity, Class aClass) {
         Intent intent = new Intent(activity,aClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

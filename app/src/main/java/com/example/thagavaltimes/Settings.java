@@ -61,4 +61,8 @@ public class Settings extends AppCompatActivity {
     public void ClickAboutUs(View view){
         MainActivity.redirectActivity(this,AboutUs.class);
     }
+
+    public void ClickLogin(View view){
+        MainActivity.redirectActivity(this,Login.class);
+    }
 }

@@ -61,4 +61,8 @@ public class AboutUs extends AppCompatActivity {
         recreate();
     }
 
+    public void ClickLogin(View view){
+        MainActivity.redirectActivity(this,Login.class);
+    }
+
 }
