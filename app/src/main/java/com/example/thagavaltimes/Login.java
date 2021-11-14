@@ -3,6 +3,7 @@ package com.example.thagavaltimes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -60,7 +61,15 @@ public class Login extends AppCompatActivity {
     public void ClickAboutUs(View view){
         MainActivity.redirectActivity(this,AboutUs.class);
     }
+
     public void ClickLogin(View view){
         recreate();
+    }
+
+    //Back Button Concept
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Login.this,MainActivity.class));
     }
 }
