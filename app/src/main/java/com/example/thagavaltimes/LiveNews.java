@@ -1,15 +1,21 @@
 package com.example.thagavaltimes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class LiveNews extends AppCompatActivity {
 
@@ -35,6 +41,9 @@ public class LiveNews extends AppCompatActivity {
         adView = findViewById(R.id.home_banner);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
+        //Admob Interstitial ad Start
+        loadInterstitialAd();
     }
 
 
@@ -87,5 +96,60 @@ public class LiveNews extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(LiveNews.this,MainActivity.class));
+        showAd();
     }
+
+    //----------------------------------------------------------------------------------------------
+    //---------------------------------- [ Interstitial Add End ] ----------------------------------
+
+    public void showAd(){
+
+        if (mInterstitialAd!=null){
+            mInterstitialAd.show(LiveNews.this);
+        }
+        else {
+            Log.d("Ad-test", "Ad faild to load");
+        }
+    }
+
+    private void loadInterstitialAd(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(this, getString(R.string.interstitial_ad_unit_id), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                super.onAdLoaded(interstitialAd);
+                Log.d("Ad-test", "Ad loadede successfully");
+                mInterstitialAd = interstitialAd;
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                        super.onAdFailedToShowFullScreenContent(adError);
+                        Log.d("Ad-test", "Ad faild to show");
+                    }
+
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        super.onAdShowedFullScreenContent();
+                        Log.d("Ad-test", "Ad showd successfully");
+                        mInterstitialAd = null;
+                    }
+
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        super.onAdDismissedFullScreenContent();
+                        Log.d("Ad-test", "Ad Dismissed");
+                    }
+                });
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.d("Ad-test", "Ad faild to load");
+                mInterstitialAd = null;
+            }
+        });
+    }
+    //---------------------------------- [ Interstitial Add End ] ----------------------------------
+    //----------------------------------------------------------------------------------------------
 }
