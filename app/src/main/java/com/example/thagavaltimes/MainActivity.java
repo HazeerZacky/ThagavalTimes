@@ -1,5 +1,6 @@
 package com.example.thagavaltimes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,16 +10,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
+    //Initialize Admob Banner Ad
+    private AdView adView;
+
+    //Initialize Admob interstitial Ad
+    private InterstitialAd mInterstitialAd ;
 
 
     //Initialize variable
@@ -27,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MainAdapter mainAdapter;
     //FloatingActionButton floatingActionButton;
+
+    //----------------------------------------------------------------------------------------------
+    //------------------------------------- [ onCreate Start ] -------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(options);
         recyclerView.setAdapter(mainAdapter);
 
+
+        //Admob Banner ad Start
+        adView = findViewById(R.id.home_banner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+
     }
+
+    //-------------------------------------- [ onCreate End ] --------------------------------------
+    //----------------------------------------------------------------------------------------------
+
 
     @Override
     protected void onStart() {
@@ -62,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         mainAdapter.stopListening();
     }
+
+    //----------------------------------------------------------------------------------------------
 
     //----------------------------- [ Navigation Part Start ] -----------------------------
     public void ClickMenu(View view) {
@@ -133,6 +164,21 @@ public class MainActivity extends AppCompatActivity {
         closeDrawer(drawerLayout);
     }
 
-    //-------------------- [ Navigation Part End ] --------------------
+    //          -------------------- [ Navigation Part End ] --------------------
+
+    //----------------------------------------------------------------------------------------------
+
+
+
+    //            ------------------ [ onBackPressed Part Start ] ------------------
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MainActivity.this,SplashActivity.class));
+    }
+    //            -------------------- [ onBackPressed Part End ] --------------------
+
+    //----------------------------------------------------------------------------------------------
+
 
 }

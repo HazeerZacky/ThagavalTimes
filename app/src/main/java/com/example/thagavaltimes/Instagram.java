@@ -7,7 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+
 public class Instagram extends AppCompatActivity {
+
+    //Initialize Admob Banner Ad
+    private AdView adView;
+
+    //Initialize Admob interstitial Ad
+    private InterstitialAd mInterstitialAd ;
 
     ///Initialize Variable
     DrawerLayout drawerLayout;
@@ -19,6 +29,12 @@ public class Instagram extends AppCompatActivity {
 
         //Assign Variable
         drawerLayout = findViewById(R.id.drawerLayout);
+
+
+        //Admob Banner ad Start
+        adView = findViewById(R.id.home_banner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
 
