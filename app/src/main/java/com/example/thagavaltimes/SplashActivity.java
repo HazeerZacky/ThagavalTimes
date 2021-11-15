@@ -6,32 +6,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private static int SPLASH_SCREEN = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+/*
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(intent);
+
+            }
+        },SPLASH_SCREEN);
+*/
+
 
         Thread thread = new Thread() {
             @Override
             public void run() {
 
                 try {
-                    sleep(3000);
+                    sleep(4000);
                 }catch (Exception e) {
                     e.printStackTrace();
                 }finally {
                     startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                    finish();
                 }
             }
         };
         thread.start();
+
+
     }
 
-    // Back Process Start    -----------------------------------------------------------------------
+    // Exit Msg Process Start    -------------------------------------------------------------------
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);

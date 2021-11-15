@@ -58,22 +58,27 @@ public class Settings extends AppCompatActivity {
 
     public void ClickHome(View view){
         MainActivity.redirectActivity(this,MainActivity.class);
+        finish();
     }
 
     public void ClickLiveNews(View view){
         MainActivity.redirectActivity(this,LiveNews.class);
+        finish();
     }
 
     public void ClickCoronaLiveTicker(View view){
         MainActivity.redirectActivity(this,CoronaLiveTicker.class);
+        finish();
     }
 
     public void ClickCategory(View view){
         MainActivity.redirectActivity(this,Category.class);
+        finish();
     }
 
     public void ClickInstagram(View view){
         MainActivity.redirectActivity(this,Instagram.class);
+        finish();
     }
 
     public void ClickSettings(View view){
@@ -82,14 +87,17 @@ public class Settings extends AppCompatActivity {
 
     public void ClickSupport(View view){
         MainActivity.redirectActivity(this,Support.class);
+        finish();
     }
     //
     public void ClickAboutUs(View view){
         MainActivity.redirectActivity(this,AboutUs.class);
+        finish();
     }
 
     public void ClickLogin(View view){
         MainActivity.redirectActivity(this,Login.class);
+        finish();
     }
 
     //Back Button Concept

@@ -1,6 +1,7 @@
 package com.example.thagavaltimes;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.ads.AdError;
@@ -170,13 +173,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //            ------------------ [ onBackPressed Part Start ] ------------------
+    //            ------------------ [ Exit Msg  Part Start ] ------------------
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(MainActivity.this,SplashActivity.class));
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Exit Conformation");
+        alertDialog.setIcon(R.drawable.tt);
+        alertDialog.setMessage("are you want to exit?");
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(MainActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Alert Run Part
+        AlertDialog alertDialog1 = alertDialog.create();
+        alertDialog1.show();
     }
-    //            -------------------- [ onBackPressed Part End ] --------------------
+    //            -------------------- [ Exit Msg Part End ] --------------------
 
     //----------------------------------------------------------------------------------------------
 
