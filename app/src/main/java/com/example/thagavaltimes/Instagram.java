@@ -4,10 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Button;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -18,6 +28,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class Instagram extends AppCompatActivity {
+
+    //WebView;
+    WebView webView;
 
     //Initialize Admob Banner Ad
     private AdView adView;
@@ -44,6 +57,47 @@ public class Instagram extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+
+        //Web View Start --------------------------------------------------------------------
+
+        //Assing variable
+        webView = findViewById(R.id.web_view);
+
+        //Initialize vebsetting
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        //Initialize connectivityManager
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        //Get active nework info
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        //Check n/w status
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.alert_dialog);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
+
+            Button btnTryAgain = dialog.findViewById(R.id.bt_try_again);
+
+            btnTryAgain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recreate();
+                }
+            });
+            dialog.show();
+
+        }else {
+            webView.loadUrl("https://www.instagram.com/thagavaltimes/");
+        }
+        //Web View End --------------------------------------------------------------------
     }
 
 

@@ -8,6 +8,7 @@
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
+
     <!-- [ Start LinearLayout for full activity ] -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,6 +50,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/web_view"/>
 
         <com.google.android.gms.ads.AdView
             android:layout_width="wrap_content"

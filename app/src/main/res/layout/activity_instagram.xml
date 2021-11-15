@@ -14,15 +14,21 @@
         <include
             layout="@layout/main_toolbar"/>
 
-        <TextView
+        <!-- [ Start RelativeLayout for Webview ] -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Instagram"
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:layout_height="match_parent">
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/web_view"/>
+        </RelativeLayout>
+        <!-- [ End RelativeLayout for Webview ] -->
 
     </LinearLayout>
+
+
+
 
     <!-- [ Start RelativeLayout for Banner Ad ] -->
     <RelativeLayout

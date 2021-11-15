@@ -9,13 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -76,7 +86,41 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
+        //--------------------------------- [ Network Check Start ] --------------------------------
 
+
+
+        //Initialize connectivityManager
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        //Get active nework info
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        //Check n/w status
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.alert_dialog);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
+
+            Button btnTryAgain = dialog.findViewById(R.id.bt_try_again);
+
+            btnTryAgain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recreate();
+                }
+            });
+            dialog.show();
+
+        }else {
+
+        }
+        //---------------------------------- [ Network Check End ] ---------------------------------
     }
 
     //-------------------------------------- [ onCreate End ] --------------------------------------
@@ -178,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Exit Conformation");
-        alertDialog.setIcon(R.drawable.tt);
-        alertDialog.setMessage("are you want to exit?");
+        alertDialog.setIcon(R.drawable.danger);
+        alertDialog.setMessage("Are you sure you want to exit?");
         alertDialog.setCancelable(false);
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
