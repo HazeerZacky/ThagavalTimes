@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -21,6 +22,8 @@ public class Login extends AppCompatActivity {
 
     //Initialize Admob Banner Ad
     private AdView adView;
+
+    Button button;
 
     //Initialize Admob interstitial Ad
     private InterstitialAd mInterstitialAd ;
@@ -45,6 +48,15 @@ public class Login extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+
+        button = (Button) findViewById(R.id.login);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminDash.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void ClickMenu(View view){
