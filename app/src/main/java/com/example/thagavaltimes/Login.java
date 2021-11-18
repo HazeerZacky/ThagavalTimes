@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminDash.class);
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                 startActivity(intent);
             }
         });
