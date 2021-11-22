@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                finishAffinity(); //Exit all activity
             }
         });
         alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
