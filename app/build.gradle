@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
 
-    //implementation 'com.orhanobut:dialogplus:1.11@aar'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
 }
 
 
