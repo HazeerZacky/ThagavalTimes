@@ -50,7 +50,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
 
+    //Popup
     implementation 'com.orhanobut:dialogplus:1.11@aar'
+
+    //Validate
+    implementation 'com.basgeekball:awesome-validation:4.3'
 }
 
 
