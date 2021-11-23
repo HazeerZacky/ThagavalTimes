@@ -30,30 +30,33 @@
             android:layout_below="@+id/img1"
             android:layout_marginLeft="10dp"
             android:text="Content Title"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/category"
-            android:text="Content Category"
-            android:textSize="15sp"
-            android:textColor="@color/black"
             android:layout_below="@+id/titletext"
             android:layout_marginLeft="10dp"
-            />
+            android:text="Content Category"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="italic"/>
 
         <TextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/description"
-            android:text="Content Description"
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:layout_below="@+id/category"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:text="Content Description"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
