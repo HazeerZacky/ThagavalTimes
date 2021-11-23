@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -27,6 +30,7 @@ public class AddActivity extends AppCompatActivity {
 
 
     EditText title, category, description, purl;
+    TextView txtTime;
     Button btnAdd;
     AwesomeValidation awesomeValidation;
 
@@ -39,7 +43,14 @@ public class AddActivity extends AppCompatActivity {
         category = (EditText)findViewById(R.id.txtCategory);
         description = (EditText)findViewById(R.id.txtDescription);
         purl = (EditText)findViewById(R.id.txtPurl);
+        txtTime = (TextView) findViewById(R.id.txtTime);
         btnAdd = (Button)findViewById(R.id.btnAdd);
+
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String dateTime = simpleDateFormat.format(calendar.getTime());
+        txtTime.setText(dateTime);
 
         //            ------------------ [ Validation  Part Start ] ------------------
 
@@ -70,7 +81,10 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (awesomeValidation.validate()){
                     insertData();
-                    clearAll();
+                    finish();
+                    startActivity(new Intent(AddActivity.this,AdminActivity.class));
+                    //clearAll();
+
                 }
             }
         });
@@ -83,6 +97,7 @@ public class AddActivity extends AppCompatActivity {
         map.put("category",category.getText().toString());
         map.put("description",description.getText().toString());
         map.put("purl",purl.getText().toString());
+        map.put("date",txtTime.getText().toString());
 
         FirebaseDatabase.getInstance().getReference().child("posts").push()
                 .setValue(map)
@@ -110,6 +125,6 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        this.finish();
+        startActivity(new Intent(AddActivity.this,AdminActivity.class));
     }
 }

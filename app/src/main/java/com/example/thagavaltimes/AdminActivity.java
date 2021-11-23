@@ -39,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                startActivity(new Intent(AdminActivity.this,AddActivity.class));
             }
         });
     }
@@ -63,5 +63,6 @@ public class AdminActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
+        startActivity(new Intent(AdminActivity.this,Login.class));
     }
 }
