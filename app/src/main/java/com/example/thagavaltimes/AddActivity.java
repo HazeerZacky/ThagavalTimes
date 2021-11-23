@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 public class AddActivity extends AppCompatActivity {
 
+
     EditText title, category, description, purl;
     Button btnAdd;
     AwesomeValidation awesomeValidation;
