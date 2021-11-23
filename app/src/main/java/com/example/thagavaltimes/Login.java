@@ -118,11 +118,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 if (task.isSuccessful()){
                     //redirect to admin page
                     startActivity(new Intent(Login.this, AdminActivity.class));
+                    clearAll();
                 }else {
                     Toast.makeText(Login.this, "Faild to login! Pleace check your credentials", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void clearAll(){
+        editTextEmail.setText("");
+        getEditTextPassword.setText("");
     }
 
 
