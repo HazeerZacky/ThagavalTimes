@@ -57,7 +57,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-
     //Back Button Concept
     @Override
     public void onBackPressed() {

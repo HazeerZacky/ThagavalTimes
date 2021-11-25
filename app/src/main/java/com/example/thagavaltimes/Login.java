@@ -56,11 +56,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         //Assign Variable
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        //Admob Banner ad Start
-        adView = findViewById(R.id.home_banner);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-
         //Admob Interstitial ad Start
         loadInterstitialAd();
 

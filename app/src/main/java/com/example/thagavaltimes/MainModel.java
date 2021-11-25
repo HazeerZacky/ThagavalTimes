@@ -1,7 +1,10 @@
 package com.example.thagavaltimes;
 
+import java.util.Map;
+
 public class MainModel {
 
+    private Map<String, String> timestamp;
     String title, category, description, purl;
 
     MainModel() {
@@ -15,6 +18,20 @@ public class MainModel {
         this.description = description;
         this.purl = purl;
     }
+
+    /*
+    public void setTimestamp(Map<String, String> timeStamp){
+        this.timestamp= timestamp;
+    }
+
+     */
+
+    /*
+    public Map<String, String> getTimestamp(){
+        return timestamp;
+    }
+
+     */
 
     //Getter and Setter ---------------------------------------------------------------------------
     public String getTitle() {
