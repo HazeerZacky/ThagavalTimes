@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/text_detail_author"
                         android:layout_marginTop="6dp"
-                        android:textColor="@color/purple_500"
+                        android:textColor="@color/orange"
                         android:textSize="16sp">
                     </TextView>
                     <TextView
@@ -62,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_detail_detail"
+                android:layout_margin="15dp"
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="8dp">
@@ -72,6 +73,7 @@
                 android:id="@+id/text_detail_content"
                 android:textSize="20sp"
                 android:textColor="@color/black"
+                android:layout_margin="15dp"
                 android:layout_marginTop="8dp">
             </TextView>
         </LinearLayout>
