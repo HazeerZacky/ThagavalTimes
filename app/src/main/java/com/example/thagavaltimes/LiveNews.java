@@ -3,12 +3,20 @@ package com.example.thagavaltimes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.thagavaltimes.Models.NewsApiResponse;
+import com.example.thagavaltimes.Models.NewsHeadlines;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -17,7 +25,15 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
-public class LiveNews extends AppCompatActivity {
+import java.util.List;
+
+public class LiveNews extends AppCompatActivity implements SelectListener, View.OnClickListener {
+
+    Button b1,b2,b3,b4,b5,b6,b7;
+    RecyclerView recyclerView;
+    CustomAdapter adapter;
+    ProgressDialog dialog;
+    SearchView searchView;
 
     //Initialize Admob Banner Ad
     private AdView adView;
@@ -44,7 +60,65 @@ public class LiveNews extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+
+        //News
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("Fatching news articals...");
+        dialog.show();
+
+        //Scrol category
+        b1 = findViewById(R.id.btn1);
+        b1.setOnClickListener(this);
+
+        b2 = findViewById(R.id.btn2);
+        b2.setOnClickListener(this);
+
+        b3 = findViewById(R.id.btn3);
+        b3.setOnClickListener(this);
+
+        b4 = findViewById(R.id.btn4);
+        b4.setOnClickListener(this);
+
+        b5 = findViewById(R.id.btn5);
+        b5.setOnClickListener(this);
+
+        b6 = findViewById(R.id.btn6);
+        b6.setOnClickListener(this);
+
+        b7 = findViewById(R.id.btn7);
+        b7.setOnClickListener(this);
+
+        RequestManager manager = new RequestManager(this);
+        manager.getNewsHeadlines(listener, "general", null);
     }
+
+    private final OnFetchDataListener<NewsApiResponse> listener = new OnFetchDataListener<NewsApiResponse>() {
+        @Override
+        public void onFetchData(List<NewsHeadlines> list, String message) {
+            if (list.isEmpty()){
+                Toast.makeText(LiveNews.this, "No Data found", Toast.LENGTH_SHORT).show();
+            }else {
+                showNews(list);
+                dialog.dismiss();
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+
+        }
+    };
+
+    private void showNews(List<NewsHeadlines> list) {
+        recyclerView = findViewById(R.id.RecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        adapter = new CustomAdapter(this, list, this);
+        recyclerView.setAdapter(adapter);
+    }
+
+
+
 
 
     public void ClickMenu(View view){
@@ -157,6 +231,22 @@ public class LiveNews extends AppCompatActivity {
                 mInterstitialAd = null;
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        Button button = (Button) view;
+        String category = button.getText().toString();
+        dialog.setTitle("Fetching news artical of " + category);
+        dialog.show();
+        RequestManager manager = new RequestManager(this);
+        manager.getNewsHeadlines(listener, category, null);
+    }
+
+    @Override
+    public void OnNewsClicked(NewsHeadlines headlines) {
+        startActivity(new Intent(LiveNews.this, DetailsActivity.class)
+                .putExtra("data", headlines));
     }
     //---------------------------------- [ Interstitial Add End ] ----------------------------------
     //----------------------------------------------------------------------------------------------
