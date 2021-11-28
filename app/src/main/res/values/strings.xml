@@ -6,4 +6,14 @@
     <string name="invalid_description">Please Enter Description</string>
     <string name="invalid_url">Please Enter Valid URL</string>
     <string name="api_key">f6c658f0958a4ac9b1968c9c344edf10</string>
+
+    <string name="active">Active</string>
+    <string name="recovered">Recovered</string>
+    <string name="total">Total</string>
+    <string name="deaths">Deaths</string>
+    <string name="covid_19">Covid-19</string>
+    <string name="country">Country</string>
+    <string name="cases">Cases</string>
+    <string name="increment_number">Loading...</string>
+    <string name="number">Loading...</string>
 </resources>

@@ -3,11 +3,18 @@ package com.example.thagavaltimes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -16,8 +23,33 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.hbb20.CountryCodePicker;
 
-public class CoronaLiveTicker extends AppCompatActivity {
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class CoronaLiveTicker extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+    CountryCodePicker countryCodePicker;
+    TextView mtodaytotal, mtotal, mactive, mtodayactive, mrecovered, mtodayrecovered, mdeaths, mtodaydeaths;
+
+    String country;
+    TextView mfilter;
+    Spinner spinner;
+    String[] types= {"cases", "deaths", "recovered", "active"};
+    private List<ModelClassCovid> modelClassList;
+    private List<ModelClassCovid> modelClassList2;
+
+    PieChart mpieChart;
+    private RecyclerView recyclerView;
+    com.example.thagavaltimes.AdapterCovid adapter;
 
     //Initialize Admob Banner Ad
     private AdView adView;
@@ -43,7 +75,106 @@ public class CoronaLiveTicker extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+
+        //COVID
+        countryCodePicker = findViewById(R.id.cpp);
+        //mtodayactive = findViewById(R.id.todayactive);
+        mactive = findViewById(R.id.totalactive);
+        mdeaths = findViewById(R.id.totaldeath);
+        mtodaydeaths = findViewById(R.id.todaydeath);
+        mrecovered = findViewById(R.id.totalrecovered);
+        mtodayrecovered = findViewById(R.id.todayrecovered);
+        mtotal = findViewById(R.id.totalcase);
+        mtodaytotal = findViewById(R.id.todaytotal);
+        mpieChart = findViewById(R.id.piechart);
+        spinner = findViewById(R.id.spinner);
+        mfilter = findViewById(R.id.filter);
+        recyclerView = findViewById(R.id.recyclerview);
+        modelClassList = new ArrayList<>();
+        modelClassList2 = new ArrayList<>();
+
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,types);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(arrayAdapter);
+
+        ApiUtilitiesCovid.getAPIInterface().getcountrydata().enqueue(new Callback<List<ModelClassCovid>>() {
+            @Override
+            public void onResponse(Call<List<ModelClassCovid>> call, Response<List<ModelClassCovid>> response) {
+                modelClassList2.addAll(response.body());
+                // adapter.notify();
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelClassCovid>> call, Throwable t) {
+
+            }
+        });
+
+        adapter = new AdapterCovid(getApplicationContext(),modelClassList2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+
+        countryCodePicker.setAutoDetectedCountry(true);
+        country = countryCodePicker.getSelectedCountryName();
+        countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                country = countryCodePicker.getSelectedCountryName();
+                fetchdata();
+            }
+        });
+        fetchdata();
     }
+
+    private void fetchdata() {
+        ApiUtilitiesCovid.getAPIInterface().getcountrydata().enqueue(new Callback<List<ModelClassCovid>>() {
+            @Override
+            public void onResponse(Call<List<ModelClassCovid>> call, Response<List<ModelClassCovid>> response) {
+                modelClassList.addAll(response.body());
+                for (int i=0; i<modelClassList.size(); i++){
+                    if (modelClassList.get(i).getCountry().equals(country)){
+                        mactive.setText((modelClassList.get(i).getActive()));
+                        mtodaydeaths.setText((modelClassList.get(i).getTodayDeaths()));
+                        mtodayrecovered.setText((modelClassList.get(i).getTodayRecovered()));
+                        mtodaytotal.setText((modelClassList.get(i).getTodayCases()));
+                        mtotal.setText((modelClassList.get(i).getCases()));
+                        mdeaths.setText((modelClassList.get(i).getDeaths()));
+                        mrecovered.setText((modelClassList.get(i).getRecovered()));
+
+                        int active, total, recovered, deaths;
+
+                        active = Integer.parseInt(modelClassList.get(i).getActive());
+                        total = Integer.parseInt(modelClassList.get(i).getCases());
+                        recovered = Integer.parseInt(modelClassList.get(i).getRecovered());
+                        deaths = Integer.parseInt(modelClassList.get(i).getDeaths());
+
+                        updategraph(active,total,recovered,deaths);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelClassCovid>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void updategraph(int active, int total, int recovered, int deaths) {
+
+        mpieChart.clearChart();
+        mpieChart.addPieSlice(new PieModel("Confirm",total, Color.parseColor("#FFB701")));
+        mpieChart.addPieSlice(new PieModel("Active",active, Color.parseColor("#FF4CAF50")));
+        mpieChart.addPieSlice(new PieModel("Recovered",recovered, Color.parseColor("#38ACCD")));
+        mpieChart.addPieSlice(new PieModel("Deaths",deaths, Color.parseColor("#F55C47")));
+        mpieChart.startAnimation();
+    }
+
 
 
     public void ClickMenu(View view){
@@ -156,6 +287,18 @@ public class CoronaLiveTicker extends AppCompatActivity {
                 mInterstitialAd = null;
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String item = types[i];
+        mfilter.setText(item);
+        adapter.filter(item);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
     //---------------------------------- [ Interstitial Add End ] ----------------------------------
     //----------------------------------------------------------------------------------------------
