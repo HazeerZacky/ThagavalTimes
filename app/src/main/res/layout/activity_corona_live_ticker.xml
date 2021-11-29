@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            android:background="@color/drawer">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -221,8 +221,8 @@
                         android:layout_width="160dp"
                         android:layout_height="60dp"
                         app:strokeWidth="2dp"
-                        android:backgroundTint="#EAE9E9"
-                        app:strokeColor="#0C0F45">
+                        android:backgroundTint="@color/covidboxtxt"
+                        app:strokeColor="@color/covidboxstoke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -268,7 +268,7 @@
                                     android:textSize="12sp"
                                     android:text="@string/number"
                                     android:id="@+id/totalcase"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/textcolor"
                                     android:layout_weight="1">
                                 </TextView>
 
@@ -293,8 +293,8 @@
                         android:layout_width="160dp"
                         android:layout_height="60dp"
                         app:strokeWidth="2dp"
-                        android:backgroundTint="#EAE9E9"
-                        app:strokeColor="#0C0F45">
+                        android:backgroundTint="@color/covidboxtxt"
+                        app:strokeColor="@color/covidboxstoke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -340,7 +340,7 @@
                                     android:textSize="12sp"
                                     android:text="@string/number"
                                     android:id="@+id/totalactive"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/textcolor"
                                     android:layout_weight="1">
                                 </TextView>
 
@@ -355,8 +355,8 @@
                         android:layout_width="160dp"
                         android:layout_height="60dp"
                         app:strokeWidth="2dp"
-                        android:backgroundTint="#EAE9E9"
-                        app:strokeColor="#0C0F45">
+                        android:backgroundTint="@color/covidboxtxt"
+                        app:strokeColor="@color/covidboxstoke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -402,7 +402,7 @@
                                     android:textSize="12sp"
                                     android:text="@string/number"
                                     android:id="@+id/totalrecovered"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/textcolor"
                                     android:layout_weight="1">
                                 </TextView>
 
@@ -427,8 +427,8 @@
                         android:layout_width="160dp"
                         android:layout_height="60dp"
                         app:strokeWidth="2dp"
-                        android:backgroundTint="#EAE9E9"
-                        app:strokeColor="#0C0F45">
+                        android:backgroundTint="@color/covidboxtxt"
+                        app:strokeColor="@color/covidboxstoke">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -474,7 +474,7 @@
                                     android:textSize="12sp"
                                     android:text="@string/number"
                                     android:id="@+id/totaldeath"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/textcolor"
                                     android:layout_weight="1">
                                 </TextView>
 
