@@ -40,7 +40,10 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //Initialize Scrole Bar Button
+    Button btnAll, btnThagavalToday, btnLineToday, btnOnThisDay, btnWordToday;
 
     //Initialize Admob Banner Ad
     private AdView adView;
@@ -64,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Buttor Declare
+        btnAll = (Button)findViewById(R.id.btnAll);
+        btnLineToday = (Button)findViewById(R.id.btnLineToday);
+        btnOnThisDay = (Button)findViewById(R.id.btnOnThisDay);
+        btnThagavalToday = (Button)findViewById(R.id.btnThagavalToday);
+        btnWordToday = (Button)findViewById(R.id.btnWordToday);
+
         // Navigation Part
         drawerLayout = findViewById(R.id.drawerLayout);
 
@@ -82,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<MainModel> options =
                 new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("date"), MainModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("posts"), MainModel.class)
                         .build();
 
         mainAdapter = new MainAdapter(options);
@@ -129,10 +139,76 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //---------------------------------- [ Network Check End ] ---------------------------------
+
+        //Category Button Onclick
+        //Button All
+        btnAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseRecyclerOptions<MainModel> options =
+                        new FirebaseRecyclerOptions.Builder<MainModel>()
+                                .setQuery(FirebaseDatabase.getInstance().getReference().child("posts"), MainModel.class)
+                                .build();
+
+                mainAdapter = new MainAdapter(options);
+                mainAdapter.startListening();
+                recyclerView.setAdapter(mainAdapter);
+            }
+        });
+
+        //Button Thagaval Today
+        btnThagavalToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search("Thagaval Today");
+            }
+        });
+
+        //Button On This Day
+        btnOnThisDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search("On This Day");
+            }
+        });
+
+        //Button Line Today
+        btnLineToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search("Line Today");
+            }
+        });
+
+        //Button Word Today
+        btnWordToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search("Word Today");
+            }
+        });
+
+
     }
 
     //-------------------------------------- [ onCreate End ] --------------------------------------
     //----------------------------------------------------------------------------------------------
+
+    private void Search(String str){
+        FirebaseRecyclerOptions<MainModel> options =
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("category").equalTo(str), MainModel.class)
+                        .build();
+
+        mainAdapter = new MainAdapter(options);
+        mainAdapter.startListening();
+        recyclerView.setAdapter(mainAdapter);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
 
 
     @Override
@@ -249,6 +325,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog1 = alertDialog.create();
         alertDialog1.show();
     }
+
+
     //            -------------------- [ Exit Msg Part End ] --------------------
 
     //----------------------------------------------------------------------------------------------
