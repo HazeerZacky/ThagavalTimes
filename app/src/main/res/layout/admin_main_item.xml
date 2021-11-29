@@ -13,6 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/contentcard"
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -26,27 +27,27 @@
             />
 
         <TextView
+            android:id="@+id/atitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/atitle"
-            android:text="Content Title"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/img2"
-            android:layout_marginLeft="10dp"/>
+            android:text="Content Title"
+            android:textColor="@color/textcolor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
+            android:id="@+id/acategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/acategory"
-            android:text="Content Category"
-            android:textSize="12sp"
-            android:textColor="#000"
-            android:layout_toRightOf="@id/img2"
             android:layout_below="@id/atitle"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/img2"
+            android:text="Content Category"
+            android:textColor="@color/textcolor"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/adescription"
@@ -56,7 +57,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/img2"
             android:text="Content Description"
-            android:textColor="#000"
+            android:textColor="@color/textcolor"
             android:textSize="10sp" />
 
         <LinearLayout

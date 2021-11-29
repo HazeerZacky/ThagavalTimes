@@ -7,13 +7,26 @@
     android:orientation="vertical"
     tools:context=".DetailsActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thagaval Times Live News"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="15sp"
+        android:textColor="@color/textcolor"
+        android:background="@color/contentcard"/>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/contentcard">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -26,7 +39,8 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text_detail_title"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textcolor"
+                        android:text="TTTT"
                         android:textStyle="bold"
                         android:textSize="26sp"
                         android:layout_width="match_parent"
@@ -53,7 +67,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/text_detail_time"
                         android:layout_marginTop="6dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textcolor"
+                        android:text="TTTT"
                         android:textSize="16sp">
                     </TextView>
                 </LinearLayout>
@@ -64,7 +79,8 @@
                 android:id="@+id/text_detail_detail"
                 android:layout_margin="15dp"
                 android:textSize="22sp"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
+                android:text="TTTT"
                 android:layout_marginTop="8dp">
             </TextView>
             <TextView
@@ -72,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/text_detail_content"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
+                android:text="TTTT"
                 android:layout_margin="15dp"
                 android:layout_marginTop="8dp">
             </TextView>

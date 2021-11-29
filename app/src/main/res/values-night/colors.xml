@@ -11,11 +11,11 @@
     <color name="orangedark">#A66402</color>
     <color name="lorange">#FFF3E0</color>
 
-    <color name="drawer">#FFFFFFFF</color>
-    <color name="textcolor">#636363</color>
-    <color name="sptextcolor">#202020</color>
-    <color name="contentcard">#F1F1F1</color>
-    <color name="splash">#FF9800</color>
+    <color name="drawer">#2C2C2C</color>
+    <color name="textcolor">#EAE9E9</color>
+    <color name="sptextcolor">#EAE9E9</color>
+    <color name="contentcard">#353535</color>
+    <color name="splash">#351F00</color>
 
 
     <color name="green">#FF4CAF50</color>

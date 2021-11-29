@@ -27,7 +27,7 @@
                 android:id="@+id/text_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:maxLines="3"/>
 
             <TextView
