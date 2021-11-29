@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/drawer">
 
         <include
             layout="@layout/main_toolbar"/>
@@ -47,8 +48,9 @@
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
+                android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="12sp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/username_icon"
@@ -83,8 +85,9 @@
                 android:paddingLeft="17dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
+                android:textColor="@color/black"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="12sp"/>
+                android:textSize="15sp"/>
 
             <ImageView
                 android:id="@+id/icon"

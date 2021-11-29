@@ -16,7 +16,8 @@
     <color name="sptextcolor">#EAE9E9</color>
     <color name="contentcard">#353535</color>
     <color name="splash">#351F00</color>
-
+    <color name="black2">#3A3A3A</color>
+    <color name="textbox">#3A3A3A</color>
 
     <color name="green">#FF4CAF50</color>
     <color name="yellow">#FFB701</color>

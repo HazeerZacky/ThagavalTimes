@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thagaval Times Admin Dash"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="15sp"
+        android:textColor="@color/textcolor"
+        android:background="@color/drawer"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="50dp"
         android:id="@+id/arv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
