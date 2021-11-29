@@ -60,7 +60,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
             public void onClick(View v) {
                 final DialogPlus dialogPlus = DialogPlus.newDialog(holder.aimg.getContext())
                         .setContentHolder(new ViewHolder(R.layout.update_popup))
-                        .setExpanded(true,1200)
+                        .setExpanded(true,800)
                         .create();
 
                 //dialogPlus.show();
