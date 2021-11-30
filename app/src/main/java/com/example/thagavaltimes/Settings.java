@@ -2,12 +2,15 @@ package com.example.thagavaltimes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -16,8 +19,12 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class Settings extends AppCompatActivity {
+
+    TextView textView;
+    SwitchMaterial switchMaterial;
 
     //Initialize Admob Banner Ad
     private AdView adView;
@@ -44,6 +51,26 @@ public class Settings extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+
+
+        //Dark Mode part
+        switchMaterial = findViewById(R.id.switchMaterial);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            switchMaterial.setChecked(true);
+        }else{
+            switchMaterial.setChecked(false);
+        }
+
+        switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchMaterial.isChecked()){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
     }
 
 
