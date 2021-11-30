@@ -17,6 +17,18 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+//import android.provider.CalendarContract;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.Calendar;
+
+import mehdi.sakout.aboutpage.AboutPage;
+import mehdi.sakout.aboutpage.Element;
+
 public class Support extends AppCompatActivity {
 
     //Initialize Admob Banner Ad
@@ -44,7 +56,46 @@ public class Support extends AppCompatActivity {
 
         //Admob Interstitial ad Start
         loadInterstitialAd();
+        //About Page
+        Element versionElement = new Element();
+        versionElement.setTitle("Version 6.2");
+
+        Element adsElement = new Element();
+        adsElement.setTitle("Advertise with us");
+
+
+        View aboutPage = new AboutPage(this)
+                .isRTL(false)
+                .setImage(R.drawable.h1)
+                .setDescription("You design your future...")
+                .addGroup("Contact Hazky Edits!")
+                .addEmail("contact.hazeer@gmail.com")
+                .addFacebook("hazky.official")
+                .addTwitter("hazky.official")
+                .addInstagram("hazky.official")    //Your instagram id
+                .addWebsite("http://mhmhazeer.blogspot.com/")
+                .addYoutube("UCREDXtNCwjuXkAFC0UEweAg")   //Enter your youtube link here (replace with my channel link)
+                .addItem(createCopyright())
+                .create();
+        setContentView(aboutPage);
     }
+
+    private Element createCopyright()
+    {
+        Element copyright = new Element();
+        @SuppressLint("DefaultLocale") final String copyrightString = String.format("HAZKY EDITS", Calendar.getInstance().get(Calendar.YEAR));
+        copyright.setTitle(copyrightString);
+        // copyright.setIcon(R.mipmap.ic_launcher);
+        copyright.setGravity(Gravity.CENTER);
+        copyright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Support.this,copyrightString,Toast.LENGTH_SHORT).show();
+            }
+        });
+        return copyright;
+    }
+
 
 
     public void ClickMenu(View view){

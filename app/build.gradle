@@ -71,6 +71,9 @@ dependencies {
     implementation 'com.hbb20:ccp:2.5.1'
     implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+    //About Page
+    implementation 'io.github.medyo:android-about-page:2.0.0'
 }
 
 
