@@ -39,8 +39,12 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //Initialize Noification
+    private static final String ONESIGNAL_APP_ID = "c656b62d-0a77-4714-a7ce-5ddfaa3babab";
 
     //Initialize Scrole Bar Button
     Button btnAll, btnThagavalToday, btnLineToday, btnOnThisDay, btnWordToday;
@@ -66,6 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Notification
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
 
         //Buttor Declare
         btnAll = (Button)findViewById(R.id.btnAll);
